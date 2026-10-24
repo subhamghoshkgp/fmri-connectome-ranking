@@ -1,0 +1,43 @@
+{
+  "source_sha256": "8e6944e1a3d31abce6123eea14c31a6b38cc92f01df90c8d95aefdcdacff2b6f",
+  "representation": "signed Fisher-transformed Pearson correlation",
+  "absolute_correlation_used": false,
+  "scales": {
+    "83": {
+      "subjects": 54,
+      "regions": 83,
+      "edges": 3403,
+      "raw_min": -0.7532017230987549,
+      "raw_max": 0.9788602590560913,
+      "raw_negative_count": 42655,
+      "raw_total_values": 183762,
+      "fisher_min": -0.9803138205647812,
+      "fisher_max": 2.2695608025772525,
+      "fisher_negative_count": 42655,
+      "implementation_vs_signed_fisher_max_abs_difference": 0.0,
+      "implementation_vs_absolute_fisher_max_abs_difference": 1.9606276411295624,
+      "raw_group_sha256": {
+        "ctrl": "0f0761a4ef94c4dd1b3cbed2d63746235f7fb52a806f13155a11eaf6615fe854",
+        "schz": "b5db2e11754b6e8db37640e4035047e49f25798b5e161b0251fcf098bfe5b535"
+      }
+    },
+    "129": {
+      "subjects": 54,
+      "regions": 129,
+      "edges": 8256,
+      "raw_min": -0.7773522734642029,
+      "raw_max": 0.9761279821395874,
+      "raw_negative_count": 116353,
+      "raw_total_values": 445824,
+      "fisher_min": -1.0386446141393668,
+      "fisher_max": 2.208093836152256,
+      "fisher_negative_count": 116353,
+      "implementation_vs_signed_fisher_max_abs_difference": 0.0,
+      "implementation_vs_absolute_fisher_max_abs_difference": 2.0772892282787336,
+      "raw_group_sha256": {
+        "ctrl": "6278e3bcf6049113bc8c8c3381106770b2c178ace60fa06dc14aad799532312b",
+        "schz": "e529ff58a6b63e13e8947c8b47c4564ccd812e660f2167932ad4982a07d5497f"
+      }
+    }
+  }
+}

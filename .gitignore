@@ -1,0 +1,18 @@
+# Reproducibility inputs and committed result NPZ files are intentionally tracked.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.partial
+.run.lock
+STOP_REQUESTED
+data/raw/

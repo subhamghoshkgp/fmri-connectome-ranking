@@ -1,0 +1,12 @@
+{
+  "methods": ["v3_expanded", "v3_rank", "v3_rank_refit", "ridge_rank"],
+  "alpha": [0.2, 0.5, 0.8],
+  "ratio": [0.1, 0.05, 0.02, 0.01, 0.005],
+  "ridge": [0.01, 0.1],
+  "rho": [0.01, 0.1, 1.0, 10.0],
+  "support_threshold": 0.0001,
+  "selection_rule": "max_inner_auc_exact_ties_support_then_index",
+  "solver": {"kkt_tol": 0.00002, "max_iter": 300},
+  "ranking_refit": {"gradient_tol": 0.00002, "max_iter": 1000},
+  "rank_prediction_threshold": "training_class_score_midpoint"
+}

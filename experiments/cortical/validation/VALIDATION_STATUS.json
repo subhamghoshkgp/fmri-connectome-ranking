@@ -1,0 +1,46 @@
+{
+  "automated_tests_passed": 33,
+  "python": "3.13.15",
+  "test_command": "python -m pytest -q tests tests_legacy",
+  "exact_original_source_sha256": "8e6944e1a3d31abce6123eea14c31a6b38cc92f01df90c8d95aefdcdacff2b6f",
+  "original_source_retrieved_and_checksum_verified": true,
+  "atlas_mat_and_xls_identical_to_new_uploads": true,
+  "original_subject_order_and_cortical_feature_extraction_checked_against_original_mat_both_resolutions": true,
+  "exact_saved_100_outer_and_5_inner_splits_verified_both_resolutions": true,
+  "inherited_model_sources_and_full_grids_unchanged": true,
+  "real_data_engineering_smoke": {
+    "83": {
+      "complete": true,
+      "outer_folds": 2,
+      "variants": 12,
+      "committed_model_pairs": 24,
+      "all_converged": true,
+      "resume_model_and_inner_commits_unchanged": true
+    },
+    "129": {
+      "complete": true,
+      "outer_folds": 2,
+      "variants": 12,
+      "committed_model_pairs": 24,
+      "all_converged": true,
+      "resume_model_and_inner_commits_unchanged": true
+    }
+  },
+  "combined_engineering_report_verified": true,
+  "final_export_rejects_partial_or_engineering_results": true,
+  "full_scientific_100_fold_results_computed": false,
+  "note": "Engineering runs used reduced grids and two outer folds, solely to verify execution. Run configs/full.json in Colab for final cortical scientific results.",
+  "notebook_execution_verification": {
+    "all_code_cells_compile": true,
+    "embedded_zip_checksum_matches": true,
+    "embedded_package_extracts_and_audits": true,
+    "notebook_subprocess_controls_tested_both_real_scales": true,
+    "notebook_resume_reuses_commits": true,
+    "full_main_targets_both_100_folds": true,
+    "combined_partial_report_works": true,
+    "incomplete_export_rejected": true,
+    "optional_model_archive_disabled_by_default": true,
+    "nbformat_schema_valid": true
+  },
+  "portability_fix": "Only recomputed Fisher-feature comparisons use rtol=0, atol=1e-14, accommodating float64 rounding across CPUs. Data checksums, atlas indices, labels, splits and training/model definitions remain unchanged."
+}

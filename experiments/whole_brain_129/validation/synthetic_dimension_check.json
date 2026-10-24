@@ -1,0 +1,35 @@
+{
+  "environment": {
+    "packages": {
+      "clarabel": "0.11.1",
+      "cvxpy": "1.9.3",
+      "h5py": "3.16.0",
+      "numpy": "2.3.5",
+      "scikit-learn": "1.8.0",
+      "scipy": "1.17.0",
+      "xlrd": "2.0.1"
+    },
+    "python": "3.12.3"
+  },
+  "factor_seconds": 0.001262160999885964,
+  "features": 8256,
+  "note": "Synthetic execution check only. These timings do not estimate full real-data runtime or AUC.",
+  "pairs": 441,
+  "refit_diagnostics": {
+    "gradient_max": 1.6840916335081335e-10
+  },
+  "refit_seconds": 0.0012976949997209886,
+  "rois": 129,
+  "selector_diagnostics": {
+    "complementarity": 4.14368709364604e-09,
+    "dual_violation": 1.4352731512786094e-24,
+    "equality_violation": 1.315574316151924e-10,
+    "kkt_max": 9.819959090848676e-07,
+    "primal_violation": 9.819959090848676e-07,
+    "stationarity": 3.3113680454350397e-09
+  },
+  "selector_solver": "SCS",
+  "selector_wall_seconds": 6.222592863000045,
+  "subjects": 42,
+  "support": 629
+}

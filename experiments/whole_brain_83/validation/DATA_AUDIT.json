@@ -1,0 +1,33 @@
+{
+  "FC_range": [
+    -0.9803138205647812,
+    2.2695608025772525
+  ],
+  "atlas_scale": "scale33",
+  "atlas_sha256": "9fe11ccdd43f1171851dd11ad52aa2c45ac9a38b9d9b9ae45ba61e41d53cd74a",
+  "class_counts": {
+    "ctrl": 27,
+    "schz": 27
+  },
+  "diagnosis_mapping": {
+    "ctrl": 0,
+    "schz": 1
+  },
+  "input_sha256": "5796e6388bd4f88792d10b85178f89026465de0dffdaa2ac9604110cad6ab400",
+  "kind": "dataset1_83",
+  "labels_sha256": "1501730ec2406064a2ac856759f1d377678224062e057c36ee161ce2d5eabafb",
+  "n_rois": 83,
+  "original_data_sha256": "8e6944e1a3d31abce6123eea14c31a6b38cc92f01df90c8d95aefdcdacff2b6f",
+  "preprocessing": "Fisher arctanh once, followed by StandardScaler fit within each training fold only",
+  "raw_FC_range": [
+    -0.7532017230987549,
+    0.9788602590560913
+  ],
+  "representation": "fisher",
+  "retained_rois": "All 83: 68 cortical, 14 subcortical, 1 brainstem",
+  "shape": [
+    54,
+    3403
+  ],
+  "subject_ids": "group plus original within-group position; same ordering as 129-region study"
+}

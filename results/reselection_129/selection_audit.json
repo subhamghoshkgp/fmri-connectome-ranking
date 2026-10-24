@@ -1,0 +1,12 @@
+{
+  "changed_candidates": {
+    "enet": 90,
+    "lasso": 75,
+    "rfe_svm": 85,
+    "v3": 85
+  },
+  "expected_folds_per_method": 100,
+  "input_fingerprint": "a70807bd51777bfcc9b6c4f432a732eaa3fb53b98f5049f5751e65e3677319db",
+  "original_complete": true,
+  "selection_rule": "max_inner_auc_exact_ties_support_then_index"
+}

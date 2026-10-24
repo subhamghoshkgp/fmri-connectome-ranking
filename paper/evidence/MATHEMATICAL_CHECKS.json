@@ -1,0 +1,73 @@
+{
+  "star_disjoint_lp_checks": [
+    {
+      "k": 2,
+      "support": "star",
+      "value": 0.7,
+      "expected": 0.7
+    },
+    {
+      "k": 2,
+      "support": "disjoint",
+      "value": 1.4,
+      "expected": 1.4
+    },
+    {
+      "k": 3,
+      "support": "star",
+      "value": 0.7,
+      "expected": 0.7
+    },
+    {
+      "k": 3,
+      "support": "disjoint",
+      "value": 2.0999999999999996,
+      "expected": 2.0999999999999996
+    },
+    {
+      "k": 4,
+      "support": "star",
+      "value": 0.7,
+      "expected": 0.7
+    },
+    {
+      "k": 4,
+      "support": "disjoint",
+      "value": 2.8,
+      "expected": 2.8
+    },
+    {
+      "k": 5,
+      "support": "star",
+      "value": 0.7,
+      "expected": 0.7
+    },
+    {
+      "k": 5,
+      "support": "disjoint",
+      "value": 3.5,
+      "expected": 3.5
+    },
+    {
+      "k": 6,
+      "support": "star",
+      "value": 0.7,
+      "expected": 0.7
+    },
+    {
+      "k": 6,
+      "support": "disjoint",
+      "value": 4.2,
+      "expected": 4.199999999999999
+    }
+  ],
+  "ridge_reduction_check": {
+    "n": 16,
+    "p": 45,
+    "rho": 0.4,
+    "untruncated_coordinates": 16,
+    "full_objective": 0.2681825713089522,
+    "reduced_objective": 0.26818257130895196,
+    "coefficient_max_abs_difference": 2.498001805406602e-16
+  }
+}

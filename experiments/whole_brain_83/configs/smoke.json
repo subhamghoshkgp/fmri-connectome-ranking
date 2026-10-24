@@ -1,0 +1,80 @@
+{
+  "cv": {
+    "seed": 20260929,
+    "repeats": 1,
+    "outer_folds": 2,
+    "inner_folds": 2
+  },
+  "baselines": {
+    "seed": 20260929,
+    "repeats": 20,
+    "outer_folds": 5,
+    "inner_folds": 5,
+    "support_threshold": 0.0001,
+    "selection_rule": "one_se",
+    "solver": {
+      "kkt_tol": 2e-05,
+      "max_iter": 300
+    },
+    "grids": {
+      "lasso": [
+        {
+          "ratio": 0.7
+        }
+      ],
+      "enet": [
+        {
+          "alpha": 0.2,
+          "ratio": 0.7
+        }
+      ],
+      "rfe_svm": [
+        {
+          "C": 0.01,
+          "k": 10,
+          "step": 0.2
+        }
+      ],
+      "v3": [
+        {
+          "alpha": 0.2,
+          "ridge": 0,
+          "ratio": 0.7
+        }
+      ]
+    }
+  },
+  "ranking": {
+    "methods": [
+      "v3_expanded",
+      "v3_rank",
+      "v3_rank_refit",
+      "ridge_rank"
+    ],
+    "alpha": [
+      0.5
+    ],
+    "ratio": [
+      0.1
+    ],
+    "ridge": [
+      0.01
+    ],
+    "rho": [
+      0.1
+    ],
+    "support_threshold": 0.0001,
+    "selection_rule": "max_inner_auc_exact_ties_support_then_index",
+    "solver": {
+      "kkt_tol": 2e-05,
+      "max_iter": 300
+    },
+    "ranking_refit": {
+      "gradient_tol": 2e-05,
+      "max_iter": 1000
+    },
+    "rank_prediction_threshold": "training_class_score_midpoint"
+  },
+  "protocol": "ENGINEERING SMOKE ONLY: actual 83-region data, reduced grids and CV; never final scientific results",
+  "representation": "fisher"
+}

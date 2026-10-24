@@ -1,0 +1,216 @@
+% ISBI 2027 full-paper format: technical content must fit within four pages.
+% Compile twice with pdfLaTeX. The supplied official spconf.sty is required.
+% Numerical results: completed whole-brain (83/129) and cortical-only (68/114) analyses.
+% Same participants and saved nested-CV splits; all cortical models were retuned.
+\documentclass{article}
+\usepackage{spconf,amsmath,amssymb,amsthm}
+\usepackage{graphicx,booktabs,array,microtype,flushend}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Sparse-to-Dense Connectome Ranking: Incidence-Gated Models and Dense Ridge Prediction},pdfauthor={Subham Ghosh},pdfsubject={ISBI 2027 manuscript for author review},pdfkeywords={functional connectome, incidence gating, pairwise ranking, ridge regularization}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\pos}[1]{(#1)_{+}}
+\newcommand{\AuthorConfirmation}[1]{\textbf{[Author confirmation: #1]}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\hyphenation{con-nec-tom-ics}
+\title{Sparse-to-Dense Connectome Ranking:\\Incidence-Gated Models and Dense Ridge Prediction}
+\name{Subham Ghosh}
+\address{Department of Electrical Engineering, IIT Kharagpur, India}
+\begin{document}
+\ninept
+\maketitle
+
+\begin{abstract}
+Functional connectome classification balances discrimination and feature reduction. We integrate anatomical incidence gating, pairwise logistic ranking, and support-restricted ridge refitting, with dense ridge ranking as the all-feature endpoint. A proposition characterizes the gate's shared-endpoint preference. Repeated nested cross-validation on 54 participants gives dense ranking the highest mean ROC-AUC: 0.7940/0.8229 for 83/129 whole-brain regions and 0.7219/0.7851 for their 68/114 cortical subsets. Whole-brain RFE--SVM achieves 0.7491/0.7929. Sparse models provide secondary support/stability trade-offs, with their leading pipeline depending on representation. These exploratory same-cohort results favor dense regularized ranking for prediction and require independent validation.
+
+\end{abstract}
+\begin{keywords}
+Functional connectivity, incidence gating, bipartite ranking, ridge regularization, schizophrenia.
+\end{keywords}
+
+\section{Introduction and objective}
+Resting-state fMRI yields thousands of correlated connections in cohorts much smaller than the feature dimension. Feature selection can aid interpretation while discarding distributed predictive information. We therefore evaluate discrimination across sparse and dense predictors, using whole-brain and cortical-only connectomes.
+
+The primary objective is to rank schizophrenia-spectrum participants above controls by held-out ROC-AUC; support size and reproducibility are secondary outcomes. We compare incidence-gated logistic learning (IGL), incidence-gated ranking (IGR), ranking with support-restricted ridge refit (IGR-R), and dense ridge ranking (DRR), alongside LASSO, elastic net, and RFE--SVM.
+
+The contribution is a \emph{connectome-specific incidence formulation, analytical characterization, ranking/refit integration, and sparse-to-dense evaluation}. The incidence norm, pairwise ranking, ridge regularization, and refitting are established ingredients; none is claimed individually new. The row-space reduction is a computational identity. Figure~\ref{fig:framework} shows the evaluated branches.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/ranking_framework.pdf}
+\caption{Incidence gating and ranking form a joint fit; IGR-R refits its selected mask. The independent DRR branch uses all training features. IGL replaces ranking by pointwise logistic loss. Preprocessing and tuning use training participants only.}
+\label{fig:framework}
+\end{figure*}
+
+\section{Related work}
+RFE--SVM connectome analysis links diagnosis to selection stability \cite{gutierrez}; LASSO and elastic net provide established sparsity baselines \cite{lasso,enet}. Saha et al. compare connectivity selection and stability \cite{saha}. Spatial fused-LASSO/GraphNet \cite{watanabe} and overlapping nodewise penalties \cite{arroyo} already encode connectome structure. Our gate specializes overlapping star groups to shared endpoint capacities; latent overlapping-group regularization itself is established \cite{latent}.
+
+Pairwise logistic loss has established AUC-consistency results \cite{gao}, ridge shrinkage is classical \cite{ridge}, and post-selection refitting predates this work \cite{postlasso}. We integrate these components into a controlled connectome comparison. Their theory does not imply higher finite-sample AUC here. Published results under other representations, cohorts, or metrics do not provide a matched numerical benchmark.
+
+\section{Sparse-to-dense formulation}
+\subsection{Signed connectivity and incidence gating}
+Let $r_{i,uv}$ be participant $i$'s signed Pearson correlation between regions $u$ and $v$. The pre-standardization feature is
+\begin{equation}
+ f_{i,uv}=\operatorname{atanh}(r_{i,uv})
+ =\frac12\log\frac{1+r_{i,uv}}{1-r_{i,uv}}.
+ \label{eq:fisher}
+\end{equation}
+No absolute-value transform is applied to the input correlations. Training-only means and standard deviations yield $X\in\R^{n\times p}$, with $p=d(d-1)/2$ undirected edges for $d$ regions. Patients have $y_i=1$ and controls $y_i=0$.
+
+The unsigned incidence matrix $H\in\{0,1\}^{d\times p}$ has two ones per column, identifying that edge's endpoints. Signed coefficients $\beta\in\R^p$ and nonnegative regional capacities $z$ satisfy
+\begin{equation}
+ |\beta|\le H^Tz,\qquad |\beta_{uv}|\le z_u+z_v.
+ \label{eq:gate}
+\end{equation}
+For a convex training loss $\ell$, incidence-gated learning solves
+\begin{equation}
+ \min_{\beta,\,z\ge0}\;
+ \ell(\beta)+\lambda_E\|\beta\|_1+\lambda_V\one^Tz
+                  +\frac{\lambda_2}{2}\|\beta\|_2^2
+ \quad\text{s.t. }\eqref{eq:gate}.
+ \label{eq:objective}
+\end{equation}
+The edge penalty encourages sparse coefficients, the capacity penalty lets incident edges share a regional cost, and ridge controls magnitude. Absolute values in \eqref{eq:gate} act on \emph{coefficients}, not on input FC. Positive capacities are neither mandatory selected edges nor established disease biomarkers.
+
+IGL also minimizes over an unpenalized intercept $b$:
+\begin{equation}
+ \ell_{\rm log}(b,\beta)=\frac1n\sum_i
+ \left[\log(1+e^{b+x_i^T\beta})-y_i(b+x_i^T\beta)\right].
+ \label{eq:logistic}
+\end{equation}
+IGR instead uses training positive--negative pairs $\mathcal P=\{(i,j):y_i=1,y_j=0\}$:
+\begin{equation}
+ \ell_{\rm rank}(\beta)=\frac1{n_+n_-}
+ \sum_{(i,j)\in\mathcal P}\log\!\left(1+e^{-(x_i-x_j)^T\beta}\right),
+ \label{eq:ranking}
+\end{equation}
+where $n_+,n_-$ are training class counts. The intercept cancels in pair differences. The objective encourages ordering; it does not directly optimize a classification threshold.
+
+\subsection{Analytical characterization of endpoint sharing}
+Eliminating capacities gives the overlapping star-group penalty
+\begin{equation}
+ \Psi_H(\beta)=\min_{z\ge0:\,H^Tz\ge|\beta|}\one^Tz.
+ \label{eq:capacity}
+\end{equation}
+It equals the minimum summed $\ell_\infty$ norms of latent coefficient vectors supported on regional incident-edge stars \cite{latent}.
+
+\begin{proposition}[Star versus disjoint support cost]
+\label{prop:star}
+Consider a simple undirected graph admitting both supports. Let $k>1$ coefficients have equal magnitude $a>0$, with arbitrary signs. For a $k$-edge star, $\Psi_H=a$; for $k$ vertex-disjoint edges, $\Psi_H=ka$. Thus, for $R(\beta)=\lambda_E\|\beta\|_1+\lambda_V\Psi_H(\beta)$,
+\begin{equation}
+ R_{\rm star}=a(k\lambda_E+\lambda_V),\qquad
+ R_{\rm disjoint}=ka(\lambda_E+\lambda_V).
+ \label{eq:regime}
+\end{equation}
+If $\lambda_E=\alpha\lambda$, $\lambda_V=(1-\alpha)\lambda$, $\lambda>0$, and $0\le\alpha<1$, then
+\begin{equation}
+ \frac{R_{\rm star}}{R_{\rm disjoint}}
+       =\alpha+\frac{1-\alpha}{k}<1.
+ \label{eq:ratio}
+\end{equation}
+\end{proposition}
+\begin{proof}
+For a star, capacity $a$ at its center is feasible, and any edge constraint implies $\one^Tz\ge a$. For disjoint edges, summing their constraints over distinct endpoints gives $\one^Tz\ge ka$; placing capacity $a$ at one endpoint of each edge attains equality. Both supports have $\|\beta\|_1=ka$, yielding \eqref{eq:regime}--\eqref{eq:ratio}.
+\end{proof}
+The common ridge cost is $\lambda_2ka^2/2$, so it does not change the cost ordering. This proposition characterizes a structural preference, not test-AUC superiority or anatomical recovery. Capacities may be nonunique.
+
+\subsection{Sparse refit and dense ridge ranking}
+IGR-R selects $S=\{e:|\hat\beta_e|>10^{-4}\}$ and solves
+\begin{equation}
+ \min_{\theta\in\R^{|S|}}\;
+ \ell_{{\rm rank},S}(\theta)+\frac\rho2\|\theta\|_2^2,
+ \qquad \rho>0.
+ \label{eq:refit}
+\end{equation}
+Coefficients outside $S$ are zero. Capacity bounds apply to the selector only. Selector and refit hyperparameters are tuned jointly in inner CV. DRR solves \eqref{eq:refit} with $S$ equal to all $p$ edges, providing an explicit dense prediction model.
+
+\begin{lemma}[Exact ridge reduction]
+\label{lem:rowspace}
+Let $X_S=U\Sigma V^T$ be an untruncated thin SVD, with $V^TV=I$, and let $L(s)$ denote the pairwise logistic loss on scores $s$. For $\rho>0$,
+\begin{equation}
+ \min_\theta L(X_S\theta)+\frac\rho2\|\theta\|_2^2
+ =\min_a L(U\Sigma a)+\frac\rho2\|a\|_2^2.
+ \label{eq:rowspace}
+\end{equation}
+The unique solution satisfies $\theta^\star=Va^\star$.
+\end{lemma}
+\begin{proof}
+Write $\theta=Va+\theta_\perp$ with $V^T\theta_\perp=0$. Then $X_S\theta=U\Sigma a$ and $\|\theta\|_2^2=\|a\|_2^2+\|\theta_\perp\|_2^2$. A positive ridge penalty sets $\theta_\perp=0$; strict convexity gives uniqueness.
+\end{proof}
+This standard computational reduction uses at most $\min(n,|S|)$ coordinates, with no singular-value truncation. It is not a separate statistical contribution.
+
+\subsection{Tuning scales, optimization, and prediction}
+Set $\lambda=r\lambda_{\max}$. For zero-coefficient loss gradient $g$, bisection finds the smallest $\lambda_{\max}$ satisfying
+\begin{equation}
+ \max_v\sum_{e:H_{ve}=1}\pos{|g_e|-\alpha\lambda_{\max}}
+       \le(1-\alpha)\lambda_{\max}.
+ \label{eq:activation}
+\end{equation}
+For ranking, $g=-\tfrac12(\bar x_+-\bar x_-)$. Shared scores $X\beta$ avoid a dense pair-difference feature matrix. SCS with CLARABEL fallback accepts selector fits with optimal status and maximum KKT residual $\le2\times10^{-5}$. Ridge fits use L-BFGS-B and full-feature gradient tolerance $2\times10^{-5}$.
+
+Rankers classify by $x^T\beta+b\ge0$, with $b=-\tfrac12(\overline{X\beta}_++\overline{X\beta}_-)$ estimated on training participants. AUC uses continuous scores, not calibrated probabilities. Each training stage is convex for fixed hyperparameters; the entire two-stage selector/refit procedure is not asserted jointly convex.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/sparse_to_dense.pdf}
+\caption{Whole-brain mean outer-test AUC versus mean selected/used edges (log scale). DRR leads AUC at both resolutions. Separately tuned pipelines are not a regularization path; means are descriptive. Table~\ref{tab:primary} includes both anatomical scopes and fold SDs.}
+\label{fig:sparse-dense}
+\end{figure*}
+
+\section{Experimental protocol}
+\subsection{Cohort, anatomy, and FC representation}
+The public Lausanne connectomes \cite{data} contain 27 controls and 27 schizophrenia/schizoaffective participants. Whole-brain Lausanne2008 inputs have 83 regions/3,403 edges and 129 regions/8,256 edges. The supplied cortical indices subset both matrix axes, excluding 14 subcortical regions and the brainstem: 68 regions/2,278 edges and 114 regions/6,441 edges. The incidence matrix is rebuilt on retained nodes. All four representations use the same 54 people.
+
+Source arrays, loaders, and saved configurations confirm \emph{signed Fisher-transformed Pearson correlations}; negative raw values remain negative after \eqref{eq:fisher}. No absolute-correlation transform or binarization is used. The source resting-state preprocessing is retained; each relevant training subset alone supplies standardization statistics. No augmentation or test-driven screening is performed.
+
+\subsection{Nested evaluation and fixed grids}
+All representations use identical saved splits: 20 repeats of five stratified outer folds, each with five inner folds (seed 20260929). Cortical tuning is repeated from scratch with unchanged grids, solvers, and model definitions. Valid candidates maximize mean inner AUC; exact ties favor smaller mean inner support, then candidate index. Selected models are refitted on outer-training participants.
+
+IGL/IGR use $\alpha\in\{0.2,0.5,0.8\}$, $r\in\{0.1,0.05,0.02,\allowbreak0.01,0.005\}$ and $\lambda_2\in\{0.01,0.1\}$ (30 candidates). IGR-R adds $\rho\in\{0.01,0.1,1,10\}$ (120); DRR uses these four $\rho$ values. IGL-ref uses the IGL objective with $\lambda_2\in\{0,0.001,0.01\}$ and ratios $\{1,0.7,0.5,0.3,\allowbreak0.2,0.1,0.05,0.02\}$ (72). LASSO uses the eight ratios; elastic net adds the three mixing weights. Linear RFE--SVM tunes $C\in\{0.01,0.1,1,10\}$ and retained counts $\{10,25,50,100,\allowbreak250,500,1000\}$, with elimination step 0.2. Unequal search budgets preclude pure loss/penalty attribution.
+
+\subsection{Endpoints and verification}
+Table~\ref{tab:primary} reports AUC/SD, mean edges, balanced accuracy (BA), F1, and chance-adjusted Nogueira stability $\widehat\Phi$ \cite{nogueira}. Supports use $|\beta_e|>10^{-4}$; RFE/IGR-R use selected masks. Dense support stability is omitted. Sensitivity, specificity, Jaccard and four one-SE controls remain in supporting results. All 4,800 outer records are complete. Means/SDs match fold CSVs; cortical metrics are independently reconstructed from exported predictions and adjusted stability from edge frequencies. Raw cortical arrays/inner caches and raw 129-region whole-brain fits were not independently re-audited.
+
+\input{results_table.tex}
+
+\section{Results and discussion}
+\subsection{Prediction and sparsity}
+DRR leads mean AUC, BA, and F1 in all four representations (Table~\ref{tab:primary}). Whole-brain AUCs are 0.7940/0.8229, versus RFE--SVM's 0.7491/0.7929. IGL leads whole-brain sparse AUC at 0.7612/0.7977. IGR-R retains 643.9/839.8 edges: 37.5\%/50.3\% fewer than IGL, with AUC reductions of 0.0003/0.0041. It has the highest whole-brain sparse F1, while IGR leads adjusted stability (0.3478/0.3618). IGL leads raw Jaccard and LASSO uses the fewest edges. These are objective-dependent trade-offs; separately tuned refits are not fixed-mask causal ablations.
+
+\subsection{With and without subcortical connections}
+Cortical DRR reaches AUC 0.7219 and 0.7851; matching-fold decreases are 0.0721 and 0.0378. Restriction lowers AUC in 15 of 16 primary method--resolution pairs; 129-region LASSO improves by 0.0070. At 68 cortical regions, IGR-R leads sparse AUC: 0.6752 versus RFE--SVM's 0.6475, using 414.2 versus 370.4 edges. At 114, RFE--SVM leads at 0.7588 versus IGR-R's 0.7554, with 437.3 versus 583.4 edges. Adjusted stability favors IGR-R at 68 regions and elastic net at 114. The sparse-model ordering changes while DRR's predictive lead persists.
+
+\subsection{Interpretation and limitations}
+Proposition~\ref{prop:star} establishes a penalty preference, not anatomical recovery. DRR's lead and the cortical AUC decreases are compatible with useful distributed information. However, removing brainstem connections and changing dimensionality/regularization geometry prevent isolating subcortical biology. Frozen grids need not be optimal for every scope; selection consistency does not establish biomarkers.
+
+Development used inspected 129-region outcomes. All representations reuse participants, so nested training cannot remove adaptive-development optimism or supply independent validation. Fold differences are descriptive \cite{varoquaux}. Independent cohorts, frozen protocols, matched budgets, additional structured competitors, and assessment of age, motion and medication confounding are needed.
+
+\section{Conclusion}
+Dense ridge ranking leads mean AUC across both resolutions and scopes. Cortical restriction generally lowers AUC and changes sparse-model rankings. Our contribution integrates connectome incidence, endpoint-sharing analysis, ranking/refit, and sparse-to-dense evaluation. The constituent tools and ridge reduction are established.
+
+\section{Compliance with Ethical Standards}
+This retrospective analysis uses public anonymized connectomes. The source reports consent and Lausanne ethics approvals \#82/14, \#382/11, and \#26.4.2005 \cite{data}. \AuthorConfirmation{confirm the applicable institutional secondary-use determination.}
+
+\section{Acknowledgments}
+\AuthorConfirmation{state funding and conflicts of interest, including their absence if applicable.}
+OpenAI ChatGPT/Codex assisted implementation, analysis, the abstract and Sections~1--6, Table~1, and Figures~1--2. Anthropic Claude assisted preliminary code development.
+
+\begin{thebibliography}{13}
+\small
+\setlength{\emergencystretch}{1em}
+\bibitem{gutierrez} L.~Guti\'errez-G\'omez et al., ``Stable biomarker identification for predicting schizophrenia in the human connectome,'' \emph{NeuroImage: Clinical}, vol.~27, art.~102316, 2020.
+\bibitem{lasso} R.~Tibshirani, ``Regression shrinkage and selection via the lasso,'' \emph{J. Roy. Statist. Soc. B}, vol.~58, no.~1, pp.~267--288, 1996.
+\bibitem{enet} H.~Zou and T.~Hastie, ``Regularization and variable selection via the elastic net,'' \emph{J. Roy. Statist. Soc. B}, vol.~67, no.~2, pp.~301--320, 2005.
+\bibitem{saha} A.~Saha, S.~Hazra, and S.~Ghosh, ``Selection and stability of functional connectivity features for classification of brain disorders,'' arXiv:2511.05531, 2025.
+\bibitem{watanabe} T.~Watanabe, D.~Kessler, C.~Scott, M.~Angstadt, and C.~Sripada, ``Disease prediction based on functional connectomes using a scalable and spatially-informed support vector machine,'' \emph{NeuroImage}, vol.~96, pp.~183--202, 2014.
+\bibitem{arroyo} J.~D.~Arroyo Reli\'on, D.~Kessler, E.~Levina, and S.~F.~Taylor, ``Network classification with applications to brain\newline connectomics,'' \emph{Ann. Appl. Stat.}, vol.~13, no.~3, pp.~1648--1677, 2019.
+\bibitem{latent} G.~Obozinski, L.~Jacob, and J.-P.~Vert, ``Group lasso with overlaps: The latent group lasso approach,'' arXiv:1110.0413, 2011.
+\bibitem{gao} W.~Gao and Z.-H.~Zhou, ``On the consistency of AUC pairwise optimization,'' in \emph{Proc. IJCAI}, 2015, pp.~939--945.
+\bibitem{ridge} A.~E.~Hoerl and R.~W.~Kennard, ``Ridge regression: Biased estimation for nonorthogonal problems,'' \emph{Technometrics}, vol.~12, no.~1, pp.~55--67, 1970.
+\bibitem{postlasso} A.~Belloni and V.~Chernozhukov, ``Least squares after model selection in high-dimensional sparse models,'' \emph{Bernoulli}, vol.~19, no.~2, pp.~521--547, 2013.
+\bibitem{data} J.~Vohryzek et al., ``Structural and functional connectomes from 27 schizophrenic patients and 27 matched healthy adults,'' Zenodo, 2020, doi:10.5281/zenodo.3758534.
+\bibitem{nogueira} S.~Nogueira, K.~Sechidis, and G.~Brown, ``On the stability of feature selection algorithms,'' \emph{J. Mach. Learn. Res.}, vol.~18, no.~174, pp.~1--54, 2018.
+\bibitem{varoquaux} G.~Varoquaux, ``Cross-validation failure: Small sample sizes lead to large error bars,'' \emph{NeuroImage}, vol.~180, pp.~68--77, 2018.
+\end{thebibliography}
+\end{document}

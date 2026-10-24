@@ -1,0 +1,21 @@
+{
+  "complete_folds_reviewed": 2400,
+  "methods_per_resolution": 12,
+  "mean_and_sd_summary_checks_passed": true,
+  "prediction_records_rechecked_83": 12960,
+  "metrics_recomputed_from_prediction_csv": 7200,
+  "convergence_records_checked_83": 1200,
+  "max_absolute_differences": {
+    "summary_83": 5.684341886080802e-14,
+    "summary_129": 2.220446049250313e-16,
+    "prediction_metrics_83": 0.0,
+    "archive_metrics_83": 0.0,
+    "support_stability_83": 2.220446049250313e-16
+  },
+  "archive_sha256": "d6b3ac3cdd80017fc81024088592b5b6ff290d1df834ce4d12f95b73a4d4dcbf",
+  "model_pairs_rechecked": 1200,
+  "test_metrics_recomputed_from_archive": 7200,
+  "sparse_supports_rechecked": 1100,
+  "scope_129": "Recomputed all saved fold-metric means/SDs; stability read from completed archived summaries. Raw 129-region models and inner tuning records not re-audited.",
+  "no_models_refitted": true
+}

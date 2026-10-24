@@ -1,0 +1,731 @@
+{
+  "complete": true,
+  "completed_outer_refits": 400,
+  "expected_folds_per_method": 100,
+  "hub_definition": {
+    "degree": "Number of selected undirected edges incident on each ROI; saved support is authoritative.",
+    "empty": "Undefined concentrations are JSON null, never zero or perfect concentration.",
+    "interpretation": "Larger HHI means greater concentration; degree HHI also depends on support size. Report together with support.",
+    "primary": "degree_hhi = sum_v (d_v / (2 * number_of_selected_edges))**2",
+    "provenance": "Explicit new descriptive definition: no numerical hub-concentration formula was present in the supplied original code/document.",
+    "top5": "Sum of five largest ROI degree/strength shares; every edge contributes to both endpoint totals.",
+    "weighted": "strength_hhi = sum_v (s_v / sum_u s_u)**2, s_v = sum of abs(standardized beta_e) on selected incident edges."
+  },
+  "inner_fits_rerun": 0,
+  "interpretation": "Descriptive paired comparisons on reused subjects. Fold SD is not a CI; no independent-fold p-values. The comparison is protocol sensitivity, not external confirmation.",
+  "methods": {
+    "enet": {
+      "all_converged": true,
+      "candidate_change_fraction": 0.9,
+      "candidate_changes": 90,
+      "completed_folds": 100,
+      "expected_folds": 100,
+      "metrics": {
+        "accuracy": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.1294016810478836,
+            "mean": 0.6435454545454546
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.1283515863829594,
+            "mean": 0.622
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.09885102512895771,
+            "mean": 0.021545454545454548
+          }
+        },
+        "auc": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.15378529496427895,
+            "mean": 0.7294000000000002
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.15077615877888892,
+            "mean": 0.6854666666666666
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.08361686446194146,
+            "mean": 0.043933333333333345
+          }
+        },
+        "balanced_accuracy": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.1279752536404293,
+            "mean": 0.645
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.12884926245604114,
+            "mean": 0.625
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.09904142134751741,
+            "mean": 0.020000000000000007
+          }
+        },
+        "f1": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.13497096568531436,
+            "mean": 0.6485569985569986
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.1601821628535978,
+            "mean": 0.618015873015873
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.11985849156965761,
+            "mean": 0.03054112554112554
+          }
+        },
+        "sensitivity": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.18982063717768138,
+            "mean": 0.6779999999999999
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.21426040147645803,
+            "mean": 0.6473333333333333
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.1548091761897456,
+            "mean": 0.030666666666666672
+          }
+        },
+        "specificity": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.22620273377586927,
+            "mean": 0.612
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.20104552756188707,
+            "mean": 0.6026666666666666
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.1471067776834366,
+            "mean": 0.009333333333333336
+          }
+        },
+        "support": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 112.18108376885807,
+            "mean": 176.52
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 54.08559994316529,
+            "mean": 52.02
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 98.5381534065241,
+            "mean": 124.5
+          }
+        }
+      },
+      "new_max_inner_auc_stability": {
+        "adjusted_overlap_min": 0.5364869726895697,
+        "adjusted_overlap_min_valid_pairs": 4950,
+        "jaccard": 0.15906058322479272,
+        "jaccard_valid_pairs": 4950,
+        "kuncheva_equal_size": 0.40629338192436665,
+        "kuncheva_equal_size_valid_pairs": 26,
+        "nogueira": 0.29092074358559517
+      },
+      "old_one_se_stability": {
+        "adjusted_overlap_min": 0.47063348712314385,
+        "adjusted_overlap_min_valid_pairs": 4950,
+        "jaccard": 0.11660120366897395,
+        "jaccard_valid_pairs": 4950,
+        "kuncheva_equal_size": 0.27410173825315315,
+        "kuncheva_equal_size_valid_pairs": 51,
+        "nogueira": 0.2060545817899696
+      },
+      "stability_delta": {
+        "adjusted_overlap_min": 0.06585348556642584,
+        "jaccard": 0.04245937955581877,
+        "kuncheva_equal_size": 0.1321916436712135,
+        "nogueira": 0.08486616179562556
+      }
+    },
+    "lasso": {
+      "all_converged": true,
+      "candidate_change_fraction": 0.75,
+      "candidate_changes": 75,
+      "completed_folds": 100,
+      "expected_folds": 100,
+      "metrics": {
+        "accuracy": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.13183160692852725,
+            "mean": 0.5999090909090908
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.1404597830827793,
+            "mean": 0.5851818181818182
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.11213074190756654,
+            "mean": 0.01472727272727273
+          }
+        },
+        "auc": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.14998876126995378,
+            "mean": 0.6449333333333332
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.15451798263785876,
+            "mean": 0.6327999999999999
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.09145969287547068,
+            "mean": 0.012133333333333335
+          }
+        },
+        "balanced_accuracy": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.13293490554912873,
+            "mean": 0.6015
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.13852315482257022,
+            "mean": 0.5910000000000001
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.108029358565202,
+            "mean": 0.010500000000000004
+          }
+        },
+        "f1": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.15502541025370806,
+            "mean": 0.5901504051504051
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.1926878248925791,
+            "mean": 0.5710130425130424
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.17230892326197766,
+            "mean": 0.019137362637362636
+          }
+        },
+        "sensitivity": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.21268921067299193,
+            "mean": 0.607
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.2515788528313125,
+            "mean": 0.6043333333333333
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.21096113758526294,
+            "mean": 0.0026666666666666726
+          }
+        },
+        "specificity": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.21572730843576177,
+            "mean": 0.596
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.2672995436129899,
+            "mean": 0.5776666666666666
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.2101453187543999,
+            "mean": 0.018333333333333333
+          }
+        },
+        "support": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 9.917335093337089,
+            "mean": 22.1
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 9.465001987652332,
+            "mean": 12.64
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 9.3651190353062,
+            "mean": 9.46
+          }
+        }
+      },
+      "new_max_inner_auc_stability": {
+        "adjusted_overlap_min": 0.2681675094467826,
+        "adjusted_overlap_min_valid_pairs": 4950,
+        "jaccard": 0.09804982000791033,
+        "jaccard_valid_pairs": 4950,
+        "kuncheva_equal_size": 0.21310423251165406,
+        "kuncheva_equal_size_valid_pairs": 177,
+        "nogueira": 0.18326095186606595
+      },
+      "old_one_se_stability": {
+        "adjusted_overlap_min": 0.3048175091516517,
+        "adjusted_overlap_min_valid_pairs": 4095,
+        "jaccard": 0.08565737053477288,
+        "jaccard_valid_pairs": 4914,
+        "kuncheva_equal_size": 0.23508411426332115,
+        "kuncheva_equal_size_valid_pairs": 191,
+        "nogueira": 0.1668455182902655
+      },
+      "stability_delta": {
+        "adjusted_overlap_min": -0.036649999704869096,
+        "jaccard": 0.01239244947313746,
+        "kuncheva_equal_size": -0.021979881751667096,
+        "nogueira": 0.016415433575800442
+      }
+    },
+    "rfe_svm": {
+      "all_converged": true,
+      "candidate_change_fraction": 0.85,
+      "candidate_changes": 85,
+      "completed_folds": 100,
+      "expected_folds": 100,
+      "metrics": {
+        "accuracy": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.1341981719126104,
+            "mean": 0.707090909090909
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.13047969956791045,
+            "mean": 0.6537272727272727
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.10857434325085719,
+            "mean": 0.05336363636363638
+          }
+        },
+        "auc": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.14073024238710902,
+            "mean": 0.7929333333333333
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.15174074115165156,
+            "mean": 0.7296666666666668
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.12323545119394998,
+            "mean": 0.06326666666666668
+          }
+        },
+        "balanced_accuracy": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.13192479917546196,
+            "mean": 0.7090000000000001
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.12899192589945416,
+            "mean": 0.6555000000000001
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.10838304997501003,
+            "mean": 0.05350000000000001
+          }
+        },
+        "f1": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.14761763937232347,
+            "mean": 0.7027620712620711
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.15234969591817427,
+            "mean": 0.6478331113331113
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.12512588635865296,
+            "mean": 0.05492895992895994
+          }
+        },
+        "sensitivity": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.20030728358285227,
+            "mean": 0.7173333333333332
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.20965767620021578,
+            "mean": 0.669
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.15623049822181084,
+            "mean": 0.048333333333333346
+          }
+        },
+        "specificity": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.21372543931852556,
+            "mean": 0.7006666666666668
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.1977210223866008,
+            "mean": 0.6419999999999999
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.15621217836299237,
+            "mean": 0.05866666666666668
+          }
+        },
+        "support": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 399.21643897955295,
+            "mean": 614.15
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 197.72679728260496,
+            "mean": 181.15
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 345.10428814630757,
+            "mean": 433.0
+          }
+        }
+      },
+      "new_max_inner_auc_stability": {
+        "adjusted_overlap_min": 0.6188596605504286,
+        "adjusted_overlap_min_valid_pairs": 4950,
+        "jaccard": 0.19645971870465243,
+        "jaccard_valid_pairs": 4950,
+        "kuncheva_equal_size": 0.42733236132169977,
+        "kuncheva_equal_size_valid_pairs": 1418,
+        "nogueira": 0.3137263940547478
+      },
+      "old_one_se_stability": {
+        "adjusted_overlap_min": 0.549436542637904,
+        "adjusted_overlap_min_valid_pairs": 4950,
+        "jaccard": 0.12567687986387754,
+        "jaccard_valid_pairs": 4950,
+        "kuncheva_equal_size": 0.3240471336812622,
+        "kuncheva_equal_size_valid_pairs": 826,
+        "nogueira": 0.2157426625889869
+      },
+      "stability_delta": {
+        "adjusted_overlap_min": 0.06942311791252465,
+        "jaccard": 0.07078283884077488,
+        "kuncheva_equal_size": 0.10328522764043757,
+        "nogueira": 0.09798373146576089
+      }
+    },
+    "v3": {
+      "all_converged": true,
+      "candidate_change_fraction": 0.85,
+      "candidate_changes": 85,
+      "completed_folds": 100,
+      "expected_folds": 100,
+      "hub_concentration": {
+        "degree_effective_rois": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 23.168598976305468,
+            "mean": 48.09325502337329
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 16.932665622886883,
+            "mean": 27.26441314964989
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 19.271925560792706,
+            "mean": 20.828841873723405
+          }
+        },
+        "degree_hhi": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.04898664803739948,
+            "mean": 0.03815918705421376
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.05145654980575807,
+            "mean": 0.05997461706889184
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.03473135563396191,
+            "mean": -0.021815430014678082
+          }
+        },
+        "degree_top5_share": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.1656243438497924,
+            "mean": 0.25067129005322863
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.16690806934496993,
+            "mean": 0.3780349825997444
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.12992295490626068,
+            "mean": -0.12736369254651572
+          }
+        },
+        "strength_effective_rois": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 16.58894019134317,
+            "mean": 32.32879641990224
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 12.412715597146128,
+            "mean": 18.676876872120506
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 13.57218572643584,
+            "mean": 13.651919547781729
+          }
+        },
+        "strength_hhi": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.06702572646170331,
+            "mean": 0.05631232426351279
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.07010516967729796,
+            "mean": 0.08756641385399438
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.04145854735066863,
+            "mean": -0.03125408959048159
+          }
+        },
+        "strength_top5_share": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.16967535658993382,
+            "mean": 0.3468037900349733
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.17671885660283118,
+            "mean": 0.4781517747901261
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.13425448131166395,
+            "mean": -0.1313479847551529
+          }
+        }
+      },
+      "metrics": {
+        "accuracy": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.1385054930329499,
+            "mean": 0.6432727272727273
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.1292107463785985,
+            "mean": 0.6076363636363636
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.11273882461027075,
+            "mean": 0.03563636363636365
+          }
+        },
+        "auc": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.151338865797209,
+            "mean": 0.7056
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.14135802782801327,
+            "mean": 0.6488666666666666
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.11611556223646538,
+            "mean": 0.05673333333333333
+          }
+        },
+        "balanced_accuracy": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.13613594908398235,
+            "mean": 0.6463333333333332
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.12769035217337044,
+            "mean": 0.6106666666666667
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.11138904632347371,
+            "mean": 0.035666666666666666
+          }
+        },
+        "f1": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.14529753472170906,
+            "mean": 0.6470134587634588
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.14034889257279587,
+            "mean": 0.614131979131979
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.11110754505256806,
+            "mean": 0.03288147963147964
+          }
+        },
+        "sensitivity": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.20629161145385663,
+            "mean": 0.6773333333333333
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.19346912681433961,
+            "mean": 0.6453333333333333
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.135911108468597,
+            "mean": 0.031999999999999994
+          }
+        },
+        "specificity": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 0.21718637488707276,
+            "mean": 0.6153333333333333
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 0.2120965834668113,
+            "mean": 0.5760000000000001
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 0.16866678644144747,
+            "mean": 0.03933333333333334
+          }
+        },
+        "support": {
+          "new": {
+            "defined_folds": 100,
+            "fold_sd": 189.0452684817939,
+            "mean": 255.26
+          },
+          "old": {
+            "defined_folds": 100,
+            "fold_sd": 78.50277226012626,
+            "mean": 79.04
+          },
+          "paired_delta": {
+            "defined_folds": 100,
+            "fold_sd": 182.30851750687776,
+            "mean": 176.22
+          }
+        }
+      },
+      "new_max_inner_auc_stability": {
+        "adjusted_overlap_min": 0.4586498389249355,
+        "adjusted_overlap_min_valid_pairs": 4950,
+        "jaccard": 0.1349238479973296,
+        "jaccard_valid_pairs": 4950,
+        "kuncheva_equal_size": 0.22285074452107356,
+        "kuncheva_equal_size_valid_pairs": 15,
+        "nogueira": 0.242952962609864
+      },
+      "old_one_se_stability": {
+        "adjusted_overlap_min": 0.35018967646455057,
+        "adjusted_overlap_min_valid_pairs": 4950,
+        "jaccard": 0.09469376262345094,
+        "jaccard_valid_pairs": 4950,
+        "kuncheva_equal_size": 0.18101115106269522,
+        "kuncheva_equal_size_valid_pairs": 40,
+        "nogueira": 0.16527727967624806
+      },
+      "stability_delta": {
+        "adjusted_overlap_min": 0.10846016246038492,
+        "jaccard": 0.04023008537387865,
+        "kuncheva_equal_size": 0.041839593458378344,
+        "nogueira": 0.07767568293361593
+      }
+    }
+  },
+  "selection_rule": "max_inner_auc_exact_ties_support_then_index"
+}

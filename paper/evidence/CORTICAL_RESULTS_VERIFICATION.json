@@ -1,0 +1,38 @@
+[
+  {
+    "original_regions": 83,
+    "cortical_regions": 68,
+    "fold_records": 1200,
+    "exported_subject_predictions": 12960,
+    "recomputed_metric_values": 7200,
+    "max_metric_error": 2.220446049250313e-16,
+    "original_splits_exact": true,
+    "fullbrain_references_match_previous_paper": true,
+    "config_matches_frozen_full_config": true,
+    "convergence_certificates_all_true": true,
+    "diagnostic_maxima": {
+      "kkt_max": 1.9499233927036674e-06,
+      "gradient_max": 4.537792198076873e-08
+    },
+    "nogueira_recomputed_from_edge_frequencies": true,
+    "limits": "Export omits raw outer-model NPZ and inner-fit caches: coefficients, fitted scalers, individual support masks, Jaccard and inner candidate rankings not independently reconstructed in this audit. No model refitting performed."
+  },
+  {
+    "original_regions": 129,
+    "cortical_regions": 114,
+    "fold_records": 1200,
+    "exported_subject_predictions": 12960,
+    "recomputed_metric_values": 7200,
+    "max_metric_error": 2.220446049250313e-16,
+    "original_splits_exact": true,
+    "fullbrain_references_match_previous_paper": true,
+    "config_matches_frozen_full_config": true,
+    "convergence_certificates_all_true": true,
+    "diagnostic_maxima": {
+      "kkt_max": 2.077718917440066e-06,
+      "gradient_max": 1.9777229577980227e-08
+    },
+    "nogueira_recomputed_from_edge_frequencies": true,
+    "limits": "Export omits raw outer-model NPZ and inner-fit caches: coefficients, fitted scalers, individual support masks, Jaccard and inner candidate rankings not independently reconstructed in this audit. No model refitting performed."
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "all_code_cells_compile": true,
+  "embedded_zip_checksum_matches": true,
+  "embedded_package_extracts_and_audits": true,
+  "notebook_subprocess_controls_tested_both_real_scales": true,
+  "notebook_resume_reuses_commits": true,
+  "full_main_targets_both_100_folds": true,
+  "combined_partial_report_works": true,
+  "incomplete_export_rejected": true,
+  "optional_model_archive_disabled_by_default": true,
+  "nbformat_schema_valid": true
+}

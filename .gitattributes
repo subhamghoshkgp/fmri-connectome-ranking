@@ -1,0 +1,8 @@
+# Preserve original experiment bytes and checkpoint source signatures on all OSes.
+* -text
+*.npz binary
+*.mat binary
+*.pdf binary
+*.png binary
+*.xls binary
+*.zip binary

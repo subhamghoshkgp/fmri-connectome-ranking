@@ -1,0 +1,5 @@
+method,paired_folds,changed_candidates
+v3,100,86
+enet,100,87
+lasso,100,73
+rfe_svm,100,69

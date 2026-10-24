@@ -1,0 +1,42 @@
+{
+  "complete": true,
+  "inner_fits_rerun": 0,
+  "methods": {
+    "enet": {
+      "candidate_changes": 90,
+      "folds_checked": 100,
+      "max_new_score_reconstruction_error": 0.0,
+      "max_original_score_reconstruction_error": 1.7763568394002505e-15,
+      "max_saved_new_kkt": 9.025454119028151e-07,
+      "max_saved_svm_relative_duality_gap": null
+    },
+    "lasso": {
+      "candidate_changes": 75,
+      "folds_checked": 100,
+      "max_new_score_reconstruction_error": 0.0,
+      "max_original_score_reconstruction_error": 1.1102230246251565e-15,
+      "max_saved_new_kkt": 8.389454269891037e-07,
+      "max_saved_svm_relative_duality_gap": null
+    },
+    "rfe_svm": {
+      "candidate_changes": 85,
+      "folds_checked": 100,
+      "max_new_score_reconstruction_error": 2.220446049250313e-15,
+      "max_original_score_reconstruction_error": 9.769962616701378e-15,
+      "max_saved_new_kkt": null,
+      "max_saved_svm_relative_duality_gap": 4.216896561213687e-07
+    },
+    "v3": {
+      "candidate_changes": 85,
+      "folds_checked": 100,
+      "max_new_score_reconstruction_error": 0.0,
+      "max_original_score_reconstruction_error": 1.3322676295501878e-15,
+      "max_saved_new_kkt": 1.204502349389105e-06,
+      "max_saved_svm_relative_duality_gap": null
+    }
+  },
+  "note": "Saved KKT diagnostics were checked against acceptance thresholds; raw-data test scores/scalers/coefficient maps and metrics were independently reconstructed. Calibration probabilities are saved but were not independently reconstructed.",
+  "original_input_fingerprint_unchanged": true,
+  "outer_refits_checked": 400,
+  "tests_passed": 23
+}

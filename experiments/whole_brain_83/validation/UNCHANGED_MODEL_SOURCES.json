@@ -1,0 +1,11 @@
+{
+  "model_sources": {
+    "ranking.py": "ec8ba76a5811d7306123bd9bbc584f56c990edf6688876f3fe6791acfb9dd878",
+    "original/szv3/solver.py": "d0b66a0c8e33f7811e559495338243474f780462dc7c4712c6e2784eae699d23",
+    "original/szv3/baselines.py": "6901aa24ee820ee722fe22dd1c408379e10ce8050a626d42784f62d9c59c713c",
+    "original/szv3/math.py": "8503d9b6bb74b4e13e37462ab6da941fc387b4b957dfbfd6a219058b82f05d28",
+    "original/szv3/metrics.py": "58728a34167fdc4febf4fe0a7905379cc94f95c01d63f637055e2619b77845e5",
+    "original/szv3/experiment.py": "009cf0225e3d274fa9b0204cec46a6681dd53b645e6498189f0ae0192b62fcb2"
+  },
+  "compared_against": "Verified Dataset-1 129-region ranking package"
+}

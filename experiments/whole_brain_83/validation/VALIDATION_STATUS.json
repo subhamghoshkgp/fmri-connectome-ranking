@@ -1,0 +1,13 @@
+{
+  "tests_passed": 23,
+  "real_data_engineering_smoke": {
+    "complete": true,
+    "outer_folds": 2,
+    "variants": 12,
+    "committed_model_pairs": 24,
+    "all_converged": true,
+    "resume_unchanged": true
+  },
+  "full_scientific_100_fold_results_computed": false,
+  "note": "Reduced-grid smoke validates execution only. The notebook must run full.json for final 100-fold results."
+}

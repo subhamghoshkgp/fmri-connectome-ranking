@@ -1,0 +1,28 @@
+{
+  "pytest_result": "18 passed",
+  "test_python": "3.12.3",
+  "test_packages": {
+    "clarabel": "0.11.1",
+    "cvxpy": "1.9.3",
+    "h5py": "3.16.0",
+    "numpy": "2.3.5",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.0",
+    "xlrd": "2.0.1"
+  },
+  "scope": "Mathematical and synthetic nested-CV tests; real Dataset-1 experiment has not been run.",
+  "reference_original_module_bytes_verified": true,
+  "original_module_sha256": {
+    "solver.py": "d0b66a0c8e33f7811e559495338243474f780462dc7c4712c6e2784eae699d23",
+    "data.py": "cc7f08891696bbef600d871bf7083013be1759b1b0d55f4c07cfdb548dddbca3",
+    "experiment.py": "009cf0225e3d274fa9b0204cec46a6681dd53b645e6498189f0ae0192b62fcb2",
+    "baselines.py": "6901aa24ee820ee722fe22dd1c408379e10ce8050a626d42784f62d9c59c713c",
+    "math.py": "8503d9b6bb74b4e13e37462ab6da941fc387b4b957dfbfd6a219058b82f05d28",
+    "report.py": "84f2c117da98d5ee5c5a7a0f6fe9033993d3887b4a72ad929a469c0c02419467",
+    "metrics.py": "58728a34167fdc4febf4fe0a7905379cc94f95c01d63f637055e2619b77845e5",
+    "storage.py": "dce9734028baa3bf925c5f7750b163130c46f568448f791c29fd450d37837262",
+    "__init__.py": "338fe8a4114284002aaa10369586b6e2c7e15cd05f12aee1484ced498ae7e7dc"
+  },
+  "colab_python_required": "3.13.15",
+  "colab_validation": "Tests run automatically in the notebook; Google Colab execution was not performed here."
+}

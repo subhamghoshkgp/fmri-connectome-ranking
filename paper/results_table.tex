@@ -1,0 +1,36 @@
+\begin{table*}[t]
+\centering
+\caption{Sparse-to-dense results on the same 54 participants and 100 saved outer folds per representation. AUC: mean $\pm$ fold SD; edges, BA and F1: means; $\widehat\Phi$: Nogueira stability. Bold marks highest AUC and adjusted stability within each representation. All primary rows use maximum-inner-AUC tuning.}
+\label{tab:primary}
+\fontsize{9}{10.5}\selectfont
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{@{}lcrrrrcrrrr@{}}
+\toprule
+& \multicolumn{5}{c}{83 whole-brain regions; 3,403 edges} & \multicolumn{5}{c}{129 whole-brain regions; 8,256 edges} \\
+\cmidrule(lr){2-6}\cmidrule(l){7-11}
+Method & AUC & Edges & BA & F1 & $\widehat\Phi$ & AUC & Edges & BA & F1 & $\widehat\Phi$ \\
+\midrule
+LASSO & 0.6519 $\pm$ 0.1652 & 21.0 & 0.5987 & 0.5808 & 0.1973 & 0.6449 $\pm$ 0.1500 & 22.1 & 0.6015 & 0.5902 & 0.1833 \\
+Elastic net & 0.6867 $\pm$ 0.1701 & 158.4 & 0.6263 & 0.6254 & 0.3172 & 0.7294 $\pm$ 0.1538 & 176.5 & 0.6450 & 0.6486 & 0.2909 \\
+IGL-ref & 0.7069 $\pm$ 0.1728 & 196.2 & 0.6343 & 0.6284 & 0.2666 & 0.7056 $\pm$ 0.1513 & 255.3 & 0.6463 & 0.6470 & 0.2430 \\
+RFE--SVM & 0.7491 $\pm$ 0.1441 & 579.6 & 0.6770 & 0.6720 & 0.3151 & 0.7929 $\pm$ 0.1407 & 614.2 & 0.7090 & 0.7028 & 0.3137 \\
+IGR-R & 0.7609 $\pm$ 0.1584 & 643.9 & 0.6855 & 0.6971 & 0.3303 & 0.7936 $\pm$ 0.1519 & 839.8 & 0.7048 & 0.7074 & 0.3334 \\
+IGR & 0.7554 $\pm$ 0.1565 & 732.5 & 0.6703 & 0.6826 & \textbf{0.3478} & 0.7762 $\pm$ 0.1585 & 971.0 & 0.6880 & 0.6875 & \textbf{0.3618} \\
+IGL & 0.7612 $\pm$ 0.1519 & 1029.4 & 0.6778 & 0.6851 & 0.2793 & 0.7977 $\pm$ 0.1533 & 1690.7 & 0.7098 & 0.7066 & 0.3406 \\
+DRR (dense) & \textbf{0.7940 $\pm$ 0.1322} & 3403.0 & 0.7120 & 0.7251 & -- & \textbf{0.8229 $\pm$ 0.1244} & 8256.0 & 0.7423 & 0.7470 & -- \\
+\midrule
+& \multicolumn{5}{c}{68 cortical regions; 2,278 edges} & \multicolumn{5}{c}{114 cortical regions; 6,441 edges} \\
+\cmidrule(lr){2-6}\cmidrule(l){7-11}
+Method & AUC & Edges & BA & F1 & $\widehat\Phi$ & AUC & Edges & BA & F1 & $\widehat\Phi$ \\
+\midrule
+LASSO & 0.6337 $\pm$ 0.1654 & 18.0 & 0.5962 & 0.5809 & 0.2285 & 0.6519 $\pm$ 0.1517 & 19.5 & 0.6045 & 0.5874 & 0.1887 \\
+Elastic net & 0.6330 $\pm$ 0.1491 & 91.5 & 0.5860 & 0.5633 & 0.2342 & 0.7217 $\pm$ 0.1566 & 150.0 & 0.6417 & 0.6304 & \textbf{0.2895} \\
+IGL-ref & 0.6297 $\pm$ 0.1502 & 99.9 & 0.5858 & 0.5829 & 0.2013 & 0.6878 $\pm$ 0.1579 & 201.4 & 0.6273 & 0.6160 & 0.2339 \\
+RFE--SVM & 0.6475 $\pm$ 0.1585 & 370.4 & 0.5940 & 0.5840 & 0.1634 & 0.7588 $\pm$ 0.1447 & 437.3 & 0.6758 & 0.6662 & 0.2641 \\
+IGR-R & 0.6752 $\pm$ 0.1484 & 414.2 & 0.6180 & 0.6129 & \textbf{0.2678} & 0.7554 $\pm$ 0.1402 & 583.4 & 0.6815 & 0.6625 & 0.2663 \\
+IGR & 0.6563 $\pm$ 0.1503 & 449.4 & 0.6043 & 0.6013 & 0.2596 & 0.7402 $\pm$ 0.1427 & 636.7 & 0.6508 & 0.6407 & 0.2886 \\
+IGL & 0.6675 $\pm$ 0.1515 & 705.8 & 0.6155 & 0.6047 & 0.1857 & 0.7514 $\pm$ 0.1528 & 1149.2 & 0.6738 & 0.6622 & 0.2711 \\
+DRR (dense) & \textbf{0.7219 $\pm$ 0.1320} & 2278.0 & 0.6667 & 0.6644 & -- & \textbf{0.7851 $\pm$ 0.1261} & 6441.0 & 0.7267 & 0.7204 & -- \\
+\bottomrule
+\end{tabular}
+\end{table*}
