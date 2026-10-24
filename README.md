@@ -1,37 +1,97 @@
 # Functional Connectome Classification and Ranking
 
-Research implementation and aggregate results for Dataset-1. No manuscript or conference assets are included.
+Compare sparse and dense learning methods for classifying functional brain connectomes. This repository contains experiment code, frozen configurations, and aggregate results for whole-brain and cortical-only analyses.
 
-## Study
+## Start here
 
-The same 54 participants (27 controls and 27 patients) are evaluated using whole-brain representations at 83 and 129 regions and cortical subsets at 68 and 114 regions. Training uses signed Fisher-transformed Pearson correlations, training-only standardization and saved repeated nested cross-validation splits.
+- **View results:** [Results guide](docs/RESULTS_INDEX.md)
+- **Run an experiment:** [Reproduction guide](docs/REPRODUCIBILITY.md)
+- **Check the saved tables:** `python scripts/verify_results.py`
 
-## Included
+## Dataset and evaluation
 
-- `experiments/`: Python runners, model modules, frozen hyperparameter grids, tests, solver settings and available protocol references.
-- `results/whole_brain_83/analysis/fold_metrics.csv`
-- `results/whole_brain_129/analysis/fold_metrics.csv`
-- `results/cortical_68/analysis/fold_metrics.csv`
-- `results/cortical_114/analysis/fold_metrics.csv`
-- `results/primary_results_overview.csv`: 32 primary summaries.
-- Supporting aggregate analyses and experiment descriptions.
+The study uses the same 54 participants: 27 controls and 27 patients. The four representations are different views of this cohort.
 
-Each fold-metrics file contains 1,200 rows: 12 variants with 100 outer evaluations each, totaling **4,800 result rows**.
+| Representation | Regions | Connections |
+|---|---:|---:|
+| Whole brain | 83 | 3,403 |
+| Whole brain | 129 | 8,256 |
+| Cortical only, from 83 regions | 68 | 2,278 |
+| Cortical only, from 129 regions | 114 | 6,441 |
 
-## Algorithms
+Experiments use signed Fisher-transformed correlations, training-only standardization, and repeated nested cross-validation: 20 repeats of five outer folds, with five inner folds. Each representation has 100 evaluations for each of 12 saved variants.
 
-Incidence-gated logistic learning (reference and expanded grids), incidence-gated ranking, ranking with support-restricted ridge refitting, and dense ridge ranking are compared against logistic LASSO, elastic net and linear RFE-SVM. One-standard-error controls are retained. Internal V3 identifiers are preserved for compatibility with the original runners and results.
+## Methods
 
-## Reproduction and data access
+| Method | Implementation identifier | Purpose |
+|---|---|---|
+| Incidence-gated logistic, reference grid | `max_auc_v3` | Structured sparse baseline |
+| Incidence-gated logistic, expanded grid | `v3_expanded` | Broader regularization search |
+| Incidence-gated ranking | `v3_rank` | Learn positive–negative score ordering |
+| Ranking with ridge refit | `v3_rank_refit` | Re-estimate weights on selected connections |
+| Dense ridge ranking | `ridge_rank` | Prediction using all connections |
+| LASSO, elastic net, RFE-SVM | `max_auc_lasso`, `max_auc_enet`, `max_auc_rfe_svm` | Comparison methods |
 
-This repository contains the code and aggregate results, but is **not a complete standalone rerun bundle**. Raw/compact participant inputs, participant-level predictions, fitted-model archives containing participant information, and standalone notebooks with embedded dataset payloads were not uploaded. Automatic approval review blocked transfers of participant-level fMRI data.
+Four additional one-standard-error variants are retained as controls. Existing filenames and identifiers are preserved so the code remains compatible with its saved configurations and checkpoints.
 
-Use the original dataset and previously supplied notebooks in your authorized local/Drive environment. Preserve the original data, code versions, split definitions, configurations and output directory when resuming an existing experiment. Run the relevant runner with `--help` to inspect its exact interface and use its original pinned environment.
+## Results at a glance
 
-The full source package's model-archive limitations also remain: the older 129-region ranking export contains only 65 fits per new method despite complete 100-fold aggregate summaries, and the supplied cortical export omits raw per-fold model NPZ files. No missing fit was fabricated.
+Mean outer-fold ROC-AUC:
 
-## Interpretation
+| Method | Whole brain 83 | Whole brain 129 | Cortex 68 | Cortex 114 |
+|---|---:|---:|---:|---:|
+| LASSO | 0.6519 | 0.6449 | 0.6337 | 0.6519 |
+| Elastic net | 0.6867 | 0.7294 | 0.6330 | 0.7217 |
+| RFE-SVM | 0.7491 | 0.7929 | 0.6475 | 0.7588 |
+| Gated logistic, reference | 0.7069 | 0.7056 | 0.6297 | 0.6878 |
+| Gated logistic, expanded | 0.7612 | 0.7977 | 0.6675 | 0.7514 |
+| Gated ranking | 0.7554 | 0.7762 | 0.6563 | 0.7402 |
+| Ranking with refit | 0.7609 | 0.7936 | 0.6752 | 0.7554 |
+| Dense ridge ranking | **0.7940** | **0.8229** | **0.7219** | **0.7851** |
 
-Dense ridge ranking gives the highest observed AUC across these four representations. All representations reuse the same participants; they are not independent validation datasets. Repeated CV fold variability is descriptive.
+AUC measures ranking discrimination, not accuracy. Repeated folds reuse participants, so these comparisons are descriptive rather than independent validation studies.
 
-See `UPLOAD_STATUS.md` for the final transfer scope.
+## Repository layout
+
+```text
+experiments/
+  whole_brain_83/     All-method 83-region experiment
+  whole_brain_129/    Ranking experiment at 129 regions
+  reselection_129/    Re-selection of saved baseline candidates
+  cortical/          Cortical-only experiments at both resolutions
+results/
+  whole_brain_83/analysis/
+  whole_brain_129/analysis/
+  cortical_68/analysis/
+  cortical_114/analysis/
+  primary_results_overview.csv
+docs/                Setup, run instructions, and results guide
+scripts/             Aggregate-results verification
+```
+
+## Quick setup
+
+Clone this repository and open a terminal in its root folder. Use Python **3.13.15**, matching the recorded later experiment environments.
+
+```bash
+python -m venv .venv
+```
+
+Activate the environment:
+
+```bash
+# Linux / macOS
+source .venv/bin/activate
+
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+```
+
+Install the lockfile for the experiment you want to run. For example:
+
+```bash
+python -m pip install -r experiments/whole_brain_83/requirements.lock.txt
+python scripts/verify_results.py
+```
+
+Datasets, participant-level outputs, and large saved-model files are managed separately to keep this repository lightweight. The [reproduction guide](docs/REPRODUCIBILITY.md) lists the input files and commands for each experiment. Start with one outer fold before launching all 100.
