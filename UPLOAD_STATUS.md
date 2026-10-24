@@ -1,9 +1,9 @@
-# Upload status
+# Upload scope
 
-The transfer was interrupted and the local staging directory was subsequently unavailable. Previously transferred Git objects have now been committed so the core research code and analyses can be reviewed.
+Completed: experiment code/configurations/tests and the available aggregate result tables, including all 4,800 final fold-metric rows and 32 primary summaries.
 
-Present: all 4,800 completed fold-metric rows, 32 primary summaries, available Python code/configurations/tests, LaTeX source and manuscript PDF.
+Removed: manuscript, conference figures, LaTeX and other manuscript assets from the current main branch.
 
-Pending: large dataset inputs, standalone notebooks, some detailed prediction/frequency/comparison tables, binary figures/reference assets, and fitted-model archives. The repository is not a complete independent rerun package yet.
+Blocked by automatic approval review: participant-level fMRI inputs and related transfers. Raw/compact inputs, participant predictions, model archives containing participant information and notebooks with embedded dataset payloads are excluded.
 
-Source inventory and source coverage files describe the prepared full package; do not interpret them as an upload completion certificate. No numerical model was changed during packaging.
+The repository is a code-and-aggregate-results package, not a full independent rerun archive. Source inventories and earlier packaging verification refer to the larger prepared source package, not a certificate that excluded files were uploaded.

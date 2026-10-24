@@ -1,7 +1,8 @@
 {
-  "status": "partial",
-  "visibility": "private",
-  "owner": "subhamghoshkgp",
-  "completed_fold_metric_rows_present": 4800,
-  "large_file_upload_complete": false
+  "status": "code_and_aggregate_results_uploaded",
+  "overall_requested_upload_complete": false,
+  "participant_level_upload": "blocked_by_automatic_approval_review",
+  "conference_assets_in_main": false,
+  "fold_metric_rows": 4800,
+  "primary_summary_rows": 32
 }
